@@ -41,3 +41,106 @@ desc answers;
 | employeeId        | int(11)       | NO   | MUL | NULL    |                |
 | questionId        | int(11)       | NO   | MUL | NULL    |                |
 +-------------------+---------------+------+-----+---------+----------------+
+
+
+
+
+
+--
+-- Table structure for table `answers`
+--
+
+DROP TABLE IF EXISTS `answers`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `answers` (
+  `answerId` int(11) NOT NULL AUTO_INCREMENT,
+  `answerDescription` varchar(2000) NOT NULL,
+  `date` date NOT NULL,
+  `answerImage` mediumblob,
+  `employeeId` int(11) NOT NULL,
+  `questionId` int(11) NOT NULL,
+  PRIMARY KEY (`answerId`),
+  KEY `employeeId` (`employeeId`),
+  KEY `questionId` (`questionId`),
+  CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`employeeId`),
+  CONSTRAINT `answers_ibfk_2` FOREIGN KEY (`questionId`) REFERENCES `questions` (`questionId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `category` (
+  `categoryId` int(11) NOT NULL,
+  `categoryName` varchar(20) NOT NULL,
+  PRIMARY KEY (`categoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'IT'),(2,'HR'),(3,'TECHNICAL'),(4,'GENERAL');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `employee` (
+  `employeeId` int(11) NOT NULL,
+  `employeeName` varchar(30) NOT NULL,
+  `employeeDesignation` varchar(30) NOT NULL,
+  `employeeLocation` varchar(20) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  PRIMARY KEY (`employeeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (123456,'Admin','Admin','Chennai','Admin','Admin@123'),(8063701,'Dharani','Associate-engineer','Dubai','Dharu','Dharu123'),(8063702,'Kaviya','Associate-engineer','Du','Kav','Kaviya@123'),(8063703,'Pavithra','Associate-engineer','Chennai','Pavithra','Pavithra'),(8063704,'Akshara','Associate-engineer','Dubai','Akshara','Akshara123'),(8063705,'Sravani','Associate-engineer','Dubai','Sravani','Sravani123'),(8063706,'nivetha','Associate-engineer','Dubai','nivi','Nivetha123'),(8063708,'abinaya','Associate-engineer','Chennai','abiii','abi@12345');
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `questions`
+--
+
+DROP TABLE IF EXISTS `questions`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `questions` (
+  `questionId` int(11) NOT NULL AUTO_INCREMENT,
+  `questionDescription` varchar(2000) NOT NULL,
+  `date` date NOT NULL,
+  `questionImage` mediumblob,
+  `employeeId` int(11) NOT NULL,
+  `categoryId` int(11) NOT NULL,
+  PRIMARY KEY (`questionId`),
+  KEY `employeeId` (`employeeId`),
+  KEY `categoryId` (`categoryId`),
+  CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`employeeId`),
+  CONSTRAINT `questions_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+
