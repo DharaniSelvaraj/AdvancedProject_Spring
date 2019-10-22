@@ -1,0 +1,43 @@
+ desc employee;
++---------------------+-------------+------+-----+---------+-------+
+| Field               | Type        | Null | Key | Default | Extra |
++---------------------+-------------+------+-----+---------+-------+
+| employeeId          | int(11)     | NO   | PRI | NULL    |       |
+| employeeName        | varchar(30) | NO   |     | NULL    |       |
+| employeeDesignation | varchar(30) | NO   |     | NULL    |       |
+| employeeLocation    | varchar(20) | NO   |     | NULL    |       |
+| username            | varchar(20) | NO   |     | NULL    |       |
+| password            | varchar(20) | NO   |     | NULL    |       |
++---------------------+-------------+------+-----+---------+-------+
+
+ desc category;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| categoryId   | int(11)     | NO   | PRI | NULL    |       |
+| categoryName | varchar(20) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+ desc questions;
++---------------------+---------------+------+-----+---------+----------------+
+| Field               | Type          | Null | Key | Default | Extra          |
++---------------------+---------------+------+-----+---------+----------------+
+| questionId          | int(11)       | NO   | PRI | NULL    | auto_increment |
+| questionDescription | varchar(2000) | NO   |     | NULL    |                |
+| date                | date          | NO   |     | NULL    |                |
+| questionImage       | mediumblob    | YES  |     | NULL    |                |
+| employeeId          | int(11)       | NO   | MUL | NULL    |                |
+| categoryId          | int(11)       | NO   | MUL | NULL    |                |
++---------------------+---------------+------+-----+---------+----------------+
+
+desc answers;
++-------------------+---------------+------+-----+---------+----------------+
+| Field             | Type          | Null | Key | Default | Extra          |
++-------------------+---------------+------+-----+---------+----------------+
+| answerId          | int(11)       | NO   | PRI | NULL    | auto_increment |
+| answerDescription | varchar(2000) | NO   |     | NULL    |                |
+| date              | date          | NO   |     | NULL    |                |
+| answerImage       | mediumblob    | YES  |     | NULL    |                |
+| employeeId        | int(11)       | NO   | MUL | NULL    |                |
+| questionId        | int(11)       | NO   | MUL | NULL    |                |
++-------------------+---------------+------+-----+---------+----------------+
